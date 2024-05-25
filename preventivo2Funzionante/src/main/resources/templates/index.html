@@ -36,9 +36,7 @@
 <body>
 
    <div th:insert="fragments/header :: block-header"></div>
-    <!--  
-    <header th:insert="fragments/navbar.html :: header"> </header>
-    -->
+    
     <div class="container container-custom text-center">
     <h1>Benvenuto nel Sistema di Preventivi</h1>
     <p>Utilizza la barra di navigazione per accedere alle diverse sezioni.</p>
@@ -78,12 +76,8 @@
     </div>
 </div>
 
-
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">© 2024 MyApp. SITO DI ROMOLO FIORENZA ...... Tutti i diritti riservati.</span>
-        </div>
-    </footer>
+<div th:insert="fragments/footer :: footer"></div>
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
