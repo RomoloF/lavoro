@@ -1,5 +1,7 @@
 package it.preventivo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.preventivo.entity.LavoriTecnologici;
+import it.preventivo.entity.Utente;
 import it.preventivo.service.LavoriTecnologiciService;
+import it.preventivo.service.UtenteService;
 
 @Controller
 @RequestMapping("/lavoriTecnologici")
@@ -18,10 +22,15 @@ public class LavoriTecnologiciController {
 
     @Autowired
     private LavoriTecnologiciService lavoriTecnologiciService;
+    @Autowired
+    private UtenteService utenteService;
 
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("lavoriTecnologiciList", lavoriTecnologiciService.findAll());
+        
+        List<Utente> utenti = utenteService.findAll();
+        model.addAttribute("utente", new Utente());  // Assicurati che l'oggetto 'utente' sia presente nel modello
         return "lavoriTecnologici/list";
     }
 

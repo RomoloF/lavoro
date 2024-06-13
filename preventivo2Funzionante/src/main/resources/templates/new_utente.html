@@ -47,6 +47,24 @@
             <a th:href="@{/utenti}" class="btn btn-secondary">Indietro</a>
         </form>
     </div>
+    
+    
+    <!--  
+    <div class="form-group blu-margin">
+                <label class="sr-only" for="idutente">Utente</label>
+                <!--  Menu a tendina per selezionare un utente        
+                <select class="form-control mr-sm-2" th:field="*{idutente}" id="idutente">
+                <!--     Opzione predefinita  
+                    <option value="1">Seleziona utente</option>
+                <!--    Itera attraverso la lista di utenti e crea un'opzione per ciascuno  
+                    <option th:each="utente : ${utenti}" th:value="${utente.idutente}" th:text="${utente.nome}"></option>
+                </select>
+            </div>
+    -->
+    
+    
+    
+    
     <div th:insert="fragments/footer :: footer"></div>
     <!-- Includere il JS di Bootstrap (opzionale, per funzionalità aggiuntive) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -26,19 +26,22 @@
                 <table class="table table-bordered table-custom" style="margin: 5px;">
                     <thead class="thead-light">
                         <tr>
-                            <th>Descrizione</th>
+                           
                             <th>Codice</th>
-                            <th>Prezzo</th>
+                            <th>Descrizione</th>
                             <th>Quantità/Misura/Pezzi</th>
+                            <th>Prezzo</th>
                             <th>Azioni</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="lavoro : ${lavoriTecnologiciList}">
-                            <td th:text="${lavoro.descrizione}">Descrizione</td>
                             <td th:text="${lavoro._codice}">Codice</td>
-                            <td th:text="${lavoro.prezzo}">Prezzo</td>
+                            <td th:text="${lavoro.descrizione}">Descrizione</td>
                             <td th:text="${lavoro.quantitaMisuraPezzi}">Quantità/Misura/Pezzi</td>
+                            <td th:text="${lavoro.prezzo}">Prezzo</td>
+                            
                             <td>
                                 <a th:href="@{/lavoriTecnologici/edit/{id}(id=${lavoro.id})}" class="btn btn-warning btn-sm btn-rounded">Modifica</a>
                                 <a th:href="@{/lavoriTecnologici/delete/{id}(id=${lavoro.id})}" class="btn btn-danger btn-sm btn-rounded">Elimina</a>

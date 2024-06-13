@@ -1,5 +1,6 @@
 package it.preventivo.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class UtenteControllerThymeleaf {
     @GetMapping
     public String getAllUtenti(Model model) {
         List<Utente> utenti = utenteService.findAll();
+        model.addAttribute("utente", new Utente());  // Assicurati che l'oggetto 'utente' sia presente nel modello
         model.addAttribute("utenti", utenti);
         return "utenti";
     }
@@ -34,9 +36,27 @@ public class UtenteControllerThymeleaf {
         model.addAttribute("utente", new Utente());
         return "new_utente";
     }
-
+//    @PostMapping("/submit")
+//    public String submitForm(@ModelAttribute Utente utente, Model model) {
+//        // Trova l'utente selezionato per ID
+//        Optional<Utente> selectedUtente = utenteService.findById(utente.getIdutente());
+//
+//        if (selectedUtente.isPresent()) {
+//        	System.out.println("Sono entrato nell' if del utenteController e precisamente nell :/submit;");
+//        	System.out.println("STAMPO L'UTENTE  >>>>>>"+selectedUtente);
+//            // Aggiunge l'utente selezionato al modello
+//            model.addAttribute("selectedUtente", selectedUtente.get());
+//            // Restituisce la vista 'utenteDettaglio.html'
+//            return "utenteDettaglio";
+//        } else {
+//            // Se l'utente non viene trovato, puoi gestire il caso di errore
+//            model.addAttribute("error", "Utente non trovato");
+//            return "error";
+//        }
+//    }
     @PostMapping
     public String saveUtente(@ModelAttribute("utente") Utente utente) {
+    	utente.setCreatoIl(new Date());  // Imposta la data corrente per il campo creatoIl
         utenteService.save(utente);
         return "redirect:/utenti";
     }
@@ -65,6 +85,7 @@ public class UtenteControllerThymeleaf {
             utente.setModificatoIl(utenteDetails.getModificatoIl());
             utente.setNome(utenteDetails.getNome());
             utente.setPassword(utenteDetails.getPassword());
+            utente.setModificatoIl(new Date());  // Imposta la data corrente per il campo modificatoIl
             utenteService.save(utente);
         }
         return "redirect:/utenti";
@@ -74,6 +95,17 @@ public class UtenteControllerThymeleaf {
     public String deleteUtente(@PathVariable("id") long id) {
         utenteService.deleteById(id);
         return "redirect:/utenti";
+    }
+    // Nuovo metodo per visualizzare i dettagli dell'utente
+    @GetMapping("/{id}")
+    public String viewUtenteDetails(@PathVariable("id") long id, Model model) {
+        Optional<Utente> utente = utenteService.findById(id);
+        if (utente.isPresent()) {
+            model.addAttribute("utente", utente.get());
+            return "utente_dettaglio";
+        } else {
+            return "redirect:/utenti";
+        }
     }
 }
 

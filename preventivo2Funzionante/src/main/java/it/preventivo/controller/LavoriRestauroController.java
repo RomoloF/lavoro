@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.preventivo.entity.LavoriRestauro;
+import it.preventivo.entity.Utente;
 import it.preventivo.service.LavoriRestauroService;
+import it.preventivo.service.UtenteService;
 
 @Controller
 @RequestMapping("/lavoriRestauro")
@@ -20,7 +22,9 @@ public class LavoriRestauroController {
 
     @Autowired
     private LavoriRestauroService lavoriRestauroService;
-
+    @Autowired
+    private UtenteService utenteService;
+    
 //    @GetMapping("/list")
 //    public String list(Model model) {
 //
@@ -33,6 +37,8 @@ public class LavoriRestauroController {
     public String listLavoriRestauro(Model model) {
         List<LavoriRestauro> lavoriRestauro = lavoriRestauroService.findAll();
         model.addAttribute("lavoriRestauro", lavoriRestauro);
+        List<Utente> utenti = utenteService.findAll();
+        model.addAttribute("utente", new Utente());
         return "lavoriRestauro/list";
     }
     @GetMapping("/create")

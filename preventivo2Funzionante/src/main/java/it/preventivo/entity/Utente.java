@@ -7,6 +7,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -14,11 +16,6 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-
-/**
- * The persistent class for the utente database table.
- *
- */
 @Entity
 @Table(name="utente")
 @NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
@@ -26,24 +23,27 @@ public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private long idutente;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idutente;
 
 	@Column(name="categoria_lavori_id")
-	private int categoriaLavoriId;
+	private Long categoriaLavoriId;
 
 	private String cognome;
-
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="creato_il")
-	private String creatoIl;
+	private Date creatoIl;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="data_di_nascita")
 	private Date dataDiNascita;
 
 	private String email;
-
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="modificato_il")
-	private String modificatoIl;
+	private Date modificatoIl;
 
 	private String nome;
 
@@ -57,19 +57,19 @@ public class Utente implements Serializable {
 	public Utente() {
 	}
 
-	public long getIdutente() {
+	public Long getIdutente() {
 		return this.idutente;
 	}
 
-	public void setIdutente(long idutente) {
+	public void setIdutente(Long idutente) {
 		this.idutente = idutente;
 	}
 
-	public int getCategoriaLavoriId() {
+	public Long getCategoriaLavoriId() {
 		return this.categoriaLavoriId;
 	}
 
-	public void setCategoriaLavoriId(int categoriaLavoriId) {
+	public void setCategoriaLavoriId(Long categoriaLavoriId) {
 		this.categoriaLavoriId = categoriaLavoriId;
 	}
 
@@ -81,11 +81,12 @@ public class Utente implements Serializable {
 		this.cognome = cognome;
 	}
 
-	public String getCreatoIl() {
+	public Date getCreatoIl() {
 		return this.creatoIl;
 	}
 
-	public void setCreatoIl(String creatoIl) {
+	public void setCreatoIl(Date creatoIl) {
+		
 		this.creatoIl = creatoIl;
 	}
 
@@ -105,11 +106,11 @@ public class Utente implements Serializable {
 		this.email = email;
 	}
 
-	public String getModificatoIl() {
+	public Date getModificatoIl() {
 		return this.modificatoIl;
 	}
 
-	public void setModificatoIl(String modificatoIl) {
+	public void setModificatoIl(Date modificatoIl) {
 		this.modificatoIl = modificatoIl;
 	}
 
